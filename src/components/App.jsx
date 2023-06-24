@@ -9,9 +9,8 @@ export class App extends Component {
     searchValue: '',
   };
 
-  handleSubmit = (e, searchValue) => {
-    e.preventDefault();
-    this.setState({ searchValue });
+  handleSubmit = searchValue => {
+    this.setState({ searchValue: searchValue });
     console.log(searchValue);
   };
 
