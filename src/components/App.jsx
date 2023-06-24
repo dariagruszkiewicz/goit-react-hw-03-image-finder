@@ -9,21 +9,21 @@ export class App extends Component {
     searchValue: '',
   };
 
-  handleSubmit = searchValue => {
+  handleSubmit = async searchValue => {
     this.setState({ searchValue: searchValue });
     console.log(searchValue);
   };
 
-  shouldComponentUpdate(_nextProps, nextState) {
-    if (nextState.searchValue !== this.state.searchValue) {
-      return true;
-    } else {
-      return false;
+  async componentDidUpdate(prevProps, prevState) {
+    if (prevState.searchValue !== this.state.searchValue) {
+      const { searchValue } = this.state;
+      const images = await fetchImagesApi(searchValue);
+      console.log(images);
+      this.setState({ images });
     }
   }
 
-  async componentDidUpdate() {
-    const { searchValue } = this.state;
+  async showPhotos(searchValue) {
     const images = await fetchImagesApi(searchValue);
     console.log(images);
     this.setState({ images });
