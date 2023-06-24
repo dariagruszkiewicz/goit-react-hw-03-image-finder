@@ -1,6 +1,5 @@
 import css from './SearchBar.module.css';
 import { Component } from 'react';
-import { fetchImagesApi } from 'services/imageApi';
 
 export class SearchBar extends Component {
   state = {
@@ -11,21 +10,6 @@ export class SearchBar extends Component {
   handleChange = e => {
     this.setState({ searchValue: e.target.value });
   };
-
-  shouldComponentUpdate(_nextProps, nextState) {
-    if (nextState.searchValue !== this.state.searchValue) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  async componentDidUpdate() {
-    const { searchValue } = this.state;
-    const images = await fetchImagesApi(searchValue);
-    console.log(images);
-    this.setState({ images });
-  }
 
   render() {
     const { onSubmit } = this.props;
