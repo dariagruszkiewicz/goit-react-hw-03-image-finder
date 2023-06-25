@@ -22,7 +22,7 @@ export class App extends Component {
   async componentDidUpdate(prevProps, prevState) {
     if (
       prevState.searchValue !== this.state.searchValue
-      // || prevState.page !== this.state.page
+      // || (prevState.page !== this.state.page)
     ) {
       this.showPhotos();
     }
