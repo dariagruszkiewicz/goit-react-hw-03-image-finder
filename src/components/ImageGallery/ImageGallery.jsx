@@ -1,8 +1,9 @@
 import { Component } from 'react';
 import css from './ImageGallery.module.css';
 import { ImageGalleryItem } from 'components/ImageGalleryItem/ImageGalleryItem';
+import PropTypes from 'prop-types';
 
-export class ImagesGallery extends Component {
+export class ImageGallery extends Component {
   render() {
     const { images } = this.props;
     return (
@@ -12,3 +13,7 @@ export class ImagesGallery extends Component {
     );
   }
 }
+
+ImageGallery.propTypes = {
+  images: PropTypes.array,
+};

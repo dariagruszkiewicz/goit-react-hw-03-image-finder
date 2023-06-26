@@ -1,5 +1,5 @@
 import { SearchBar } from './SearchBar/SearchBar';
-import { ImagesGallery } from './ImageGallery/ImageGallery';
+import { ImageGallery } from './ImageGallery/ImageGallery';
 import { Component } from 'react';
 import { fetchImagesApi } from 'services/imageApi';
 import { Loader } from './Loader/Loader';
@@ -52,12 +52,16 @@ export class App extends Component {
     });
   };
 
+  scrollToBottom() {
+    this.el.scrollIntoView({ behavior: 'smooth' });
+  }
+
   render() {
     const { images, isLoading } = this.state;
     return (
       <div>
         <SearchBar onSubmit={this.handleSubmit}></SearchBar>
-        <ImagesGallery images={images} />
+        <ImageGallery images={images} />
         {images.length >= 12 ? <Button onClick={this.handleLoadMore} /> : ''}
         {isLoading && <Loader />}
       </div>
