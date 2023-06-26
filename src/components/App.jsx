@@ -15,14 +15,14 @@ export class App extends Component {
   };
 
   handleSubmit = async searchValue => {
-    this.setState({ searchValue: searchValue, page: this.state.page });
+    this.setState({ searchValue: searchValue, page: 1 });
     console.log(searchValue);
   };
 
   async componentDidUpdate(prevProps, prevState) {
     if (
-      prevState.searchValue !== this.state.searchValue
-      // || (prevState.page !== this.state.page)
+      prevState.searchValue !== this.state.searchValue ||
+      prevState.page !== this.state.page
     ) {
       this.showPhotos();
     }
@@ -34,12 +34,15 @@ export class App extends Component {
       const { searchValue, page } = this.state;
       const images = await fetchImagesApi(searchValue, page);
       console.log(images);
-      this.setState({ images });
+      if (this.state.page === 1) {
+        this.setState({ images });
+      } else {
+        this.setState({ images: this.state.images.concat(images) });
+      }
     } catch (error) {
       this.setState({ error });
     } finally {
-      this.setState({ isLoading: false, page: this.state.page + 1 });
-      console.log(this.state.page);
+      this.setState({ isLoading: false });
     }
   }
 
@@ -47,7 +50,6 @@ export class App extends Component {
     this.setState(prevState => {
       return { page: prevState.page + 1 };
     });
-    console.log(this.state.page);
   };
 
   render() {
@@ -56,7 +58,7 @@ export class App extends Component {
       <div>
         <SearchBar onSubmit={this.handleSubmit}></SearchBar>
         <ImagesGallery images={images} />
-        <Button onClick={this.handleLoadMore} />
+        {images.length >= 12 ? <Button onClick={this.handleLoadMore} /> : ''}
         {isLoading && <Loader />}
       </div>
     );
