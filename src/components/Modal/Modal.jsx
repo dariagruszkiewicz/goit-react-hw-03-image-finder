@@ -4,12 +4,10 @@ import { Component } from 'react';
 export class Modal extends Component {
   componentDidMount() {
     window.addEventListener('keydown', this.closeModal);
-    window.addEventListener('mousedown', this.closeModal);
   }
 
   componentWillUnmount() {
     window.removeEventListener('keydown', this.closeModal);
-    window.removeEventListener('mousedown', this.closeModal);
   }
 
   closeModal = ({ target, currentTarget, code }) => {

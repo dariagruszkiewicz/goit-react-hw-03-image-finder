@@ -9,7 +9,7 @@ export class ImageGalleryItem extends Component {
     id: '',
   };
 
-  showModal = id => {
+  showModal = () => {
     this.setState({ isShowModal: true });
   };
 
@@ -27,15 +27,11 @@ export class ImageGalleryItem extends Component {
             <img
               className={css.imageGalleryItem_image}
               src={webformatURL}
-              alt={id}
+              alt={tags}
               onClick={this.showModal}
             />
             {isShowModal && (
-              <Modal
-                largeImage={largeImageURL}
-                alt={tags}
-                onClick={this.hideModal}
-              />
+              <Modal largeImage={largeImageURL} onClick={this.hideModal} />
             )}
           </li>
         ))}
