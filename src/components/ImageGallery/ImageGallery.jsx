@@ -8,7 +8,14 @@ export class ImageGallery extends Component {
     const { images } = this.props;
     return (
       <ul className={css.imageGallery}>
-        <ImageGalleryItem images={images} />
+        {images.map(({ id, webformatURL, largeImageURL, tags }) => (
+          <ImageGalleryItem
+            key={id}
+            src={webformatURL}
+            alt={tags}
+            largeImage={largeImageURL}
+          />
+        ))}
       </ul>
     );
   }

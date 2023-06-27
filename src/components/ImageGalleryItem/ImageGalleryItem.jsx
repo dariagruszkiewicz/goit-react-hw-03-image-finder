@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 export class ImageGalleryItem extends Component {
   state = {
     isShowModal: false,
-    id: '',
   };
 
   showModal = () => {
@@ -18,24 +17,20 @@ export class ImageGalleryItem extends Component {
   };
 
   render() {
-    const { images } = this.props;
+    const { src, alt, largeImage } = this.props;
     const { isShowModal } = this.state;
     return (
-      <>
-        {images.map(({ id, webformatURL, largeImageURL, tags }) => (
-          <li className={css.imageGalleryItem} key={id}>
-            <img
-              className={css.imageGalleryItem_image}
-              src={webformatURL}
-              alt={tags}
-              onClick={this.showModal}
-            />
-            {isShowModal && (
-              <Modal largeImage={largeImageURL} onClick={this.hideModal} />
-            )}
-          </li>
-        ))}
-      </>
+      <li className={css.imageGalleryItem}>
+        <img
+          className={css.imageGalleryItem_image}
+          src={src}
+          alt={alt}
+          onClick={this.showModal}
+        />
+        {isShowModal && (
+          <Modal largeImage={largeImage} onClick={this.hideModal} />
+        )}
+      </li>
     );
   }
 }

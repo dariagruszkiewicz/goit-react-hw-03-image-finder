@@ -21,7 +21,7 @@ export class Modal extends Component {
     return (
       <div className={css.overlay} onClick={this.closeModal}>
         <div className={css.modal}>
-          <img width="800" height="600" src={largeImage} alt={alt} id={id} />
+          <img src={largeImage} alt={alt} id={id} />
         </div>
       </div>
     );
